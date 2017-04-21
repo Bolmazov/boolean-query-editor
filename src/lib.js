@@ -1,11 +1,3 @@
-/**
- * @param {string} text
- * @returns {Array.<{ text: string, start: number, stop: number }>}
- */
-export function extractOperatorsFromText(text) {
-  return [];
-}
-
 export function regexLastOffset(regex, text) {
   let offset = 0;
   let res = regex.exec(text);
@@ -32,3 +24,5 @@ export function normalizeSelectedIndex(selectedIndex, count) {
 
   return index;
 }
+
+export function noop() {}

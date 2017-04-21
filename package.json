@@ -4,6 +4,10 @@
   "private": true,
   "dependencies": {
     "draft-js": "^0.10.0",
+    "draft-js-multidecorators": "github:echenley/draft-js-multidecorators#8b2df19",
+    "immutable": "^3.8.1",
+    "lodash.flowright": "^3.5.0",
+    "prismjs": "^1.6.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2"
   },

@@ -1,0 +1,12 @@
+.Term-name {
+  font-weight: 400;
+}
+
+.Term-synonyms {
+  margin: 0 5px;
+  padding: 1px 4px 2px;
+  font-size: 10px;
+  line-height: 1.2;
+  border-radius: 2px;
+  background: #cee4b0;
+}
