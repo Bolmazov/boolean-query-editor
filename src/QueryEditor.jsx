@@ -1,10 +1,10 @@
 import React, { PropTypes, Component } from 'react';
 import { Editor } from 'draft-js';
-import { termStartIndex } from './lib';
+
+import { noop } from './lib';
 
 export { normalizeSelectedIndex } from './lib';
 
-function noop() {}
 
 class QueryEditor extends Component {
   static propTypes = {
@@ -44,15 +44,11 @@ class QueryEditor extends Component {
     }
 
     const range = selection.getRangeAt(0);
-    const textContent = range.startContainer.textContent;
-    const start = termStartIndex(textContent);
+    const text = range.startContainer.textContent.trim();
     const end = range.startOffset;
+    const start = end - text.length;
 
-    return {
-      start,
-      end,
-      text: textContent.substring(start, end),
-    }
+    return { start, end, text }
   };
 
   getQueryState = () => {
@@ -121,6 +117,8 @@ class QueryEditor extends Component {
   };
 
   handleReturn = (e) => {
+    e.preventDefault();
+
     if (this.queryState) {
       const { text, selectedIndex } = this.queryState;
       const content = this.props.editorState.getCurrentContent();
@@ -133,14 +131,12 @@ class QueryEditor extends Component {
 
       this.queryState = null;
       this.props.onQueryChange(this.queryState);
-
-      return 'handled';
     }
 
-    return 'not-handled';
+    return 'handled';
   };
 
-  handlePastedText = () => true;
+  handlePastedText = () => false;
 
   render() {
     const { editorState } = this.props;
