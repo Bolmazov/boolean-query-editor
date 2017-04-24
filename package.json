@@ -1,7 +1,8 @@
 {
   "name": "lucene-query-editor",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.2.0",
+  "description": "Lucene query editor",
+  "main": "src/QueryEditor.jsx",
   "dependencies": {
     "draft-js": "^0.10.0",
     "draft-js-multidecorators": "github:echenley/draft-js-multidecorators#8b2df19",
