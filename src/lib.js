@@ -26,3 +26,12 @@ export function normalizeSelectedIndex(selectedIndex, count) {
 }
 
 export function noop() {}
+
+/**
+ * Checks if input is a string
+ * @param {*} input
+ * @returns {boolean}
+ */
+export function isString(input) {
+  return Object.prototype.toString.call(input) === '[object String]';
+}

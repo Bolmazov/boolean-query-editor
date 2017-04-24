@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { EditorState, Modifier } from 'draft-js';
 import flowRight from 'lodash.flowright';
 
+import tokenize from './tokenize';
 import decorator from './decorator';
+import { isString } from './lib';
 import QueryEditor, { normalizeSelectedIndex } from './QueryEditor';
 import Suggestions, { skills } from './Suggestions';
 import './App.css';
@@ -23,6 +25,13 @@ class App extends Component {
   };
 
   onQueryChange = (queryState) => {
+    if (queryState) {
+      const [token] = tokenize(queryState.text);
+
+      if (!isString(token) && token.type === 'operator') {
+        this.handleOperatorInput(token);
+      }
+    }
     this.setState({ queryState });
   };
 
@@ -53,18 +62,17 @@ class App extends Component {
     );
   };
 
-  insertDefaultOperator = (editorState) => {
+  applyOperatorEntity = (editorState, selection, operator) => {
     const contentState = editorState.getCurrentContent();
-    const selection = contentState.getSelectionAfter();
     const contentStateWithOperatorEntity = contentState.createEntity(
       'OPERATOR',
       'IMMUTABLE'
     );
     const operatorEntityKey = contentStateWithOperatorEntity.getLastCreatedEntityKey();
-    const contentStateWithOperator = Modifier.insertText(
+    const contentStateWithOperator = Modifier.replaceText(
       contentState,
       selection,
-      'OR',
+      operator,
       null,
       operatorEntityKey
     );
@@ -74,6 +82,13 @@ class App extends Component {
       contentStateWithOperator,
       'apply-entity',
     );
+  };
+
+  insertDefaultOperator = (editorState) => {
+    const contentState = editorState.getCurrentContent();
+    const selection = contentState.getSelectionAfter();
+
+    return this.applyOperatorEntity(editorState, selection, 'OR');
   };
 
   insertSpace = (editorState) => {
@@ -109,6 +124,19 @@ class App extends Component {
   handleQueryReturn = (text, selectedIndex, selection) => {
     this.setState({
       editorState: this.addTerm(text, selectedIndex, selection),
+    });
+  };
+
+  handleOperatorInput = (token) => {
+    const { editorState } = this.state;
+    const selectionState = editorState.getSelection();
+    const end = selectionState.getEndOffset();
+    const selection = selectionState.merge({
+      anchorOffset: end - token.length,
+    });
+
+    this.setState({
+      editorState: this.applyOperatorEntity(editorState, selection, token.content),
     });
   };
 
