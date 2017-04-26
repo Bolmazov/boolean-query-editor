@@ -1,10 +1,6 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import QueryEditor from './QueryEditor';
+import Decorator from './lucene-decorator';
 
-import App from './App';
-import './index.css';
-
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-);
+export { normalizeSelectedIndex } from './lib';
+export const LuceneDecorator = Decorator;
+export default QueryEditor;

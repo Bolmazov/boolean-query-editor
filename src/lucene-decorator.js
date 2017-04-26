@@ -1,10 +1,7 @@
 import React from 'react';
 import Immutable from 'immutable';
-import { CompositeDecorator } from 'draft-js';
-import MultiDecorator from 'draft-js-multidecorators';
 import tokenize from './tokenize';
-import Term from './Term';
-import 'prismjs/themes/prism.css';
+// import 'prismjs/themes/prism.css';
 
 
 function occupySlice(targetArr, start, end, componentKey) {
@@ -13,7 +10,7 @@ function occupySlice(targetArr, start, end, componentKey) {
   }
 }
 
-class Decorator {
+class LuceneDecorator {
   highlighted = {};
 
   getDecorations = (block) => {
@@ -68,25 +65,4 @@ class Decorator {
   };
 }
 
-function strategy(contentBlock, callback, contentState) {
-  contentBlock.findEntityRanges(
-    (character) => {
-      const entityKey = character.getEntity();
-
-      if (entityKey === null) {
-        return false;
-      }
-
-      return contentState.getEntity(entityKey).getType() === 'TERM';
-    },
-    callback
-  );
-}
-
-export default new MultiDecorator([
-  new Decorator(),
-  new CompositeDecorator([{
-    strategy,
-    component: Term,
-  }])
-]);
+export default LuceneDecorator;

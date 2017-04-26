@@ -1,9 +1,8 @@
 import React, { PropTypes, Component } from 'react';
 import { Editor } from 'draft-js';
 
+import tokenize from './tokenize';
 import { noop } from './lib';
-
-export { normalizeSelectedIndex } from './lib';
 
 
 class QueryEditor extends Component {
@@ -61,11 +60,14 @@ class QueryEditor extends Component {
     const tempRange = window.getSelection().getRangeAt(0).cloneRange();
     tempRange.setStart(tempRange.startContainer, textRange.start);
     const rangeRect = tempRange.getBoundingClientRect();
+    const text = textRange.text;
+    const [token] = tokenize(text);
 
     this.queryState = {
+      text,
+      token,
       top: rangeRect.bottom,
       left: rangeRect.left,
-      text: textRange.text,
       selectedIndex: 0,
     };
 

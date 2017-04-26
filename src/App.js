@@ -1,14 +1,35 @@
 import React, { Component } from 'react';
-import { EditorState, Modifier } from 'draft-js';
+import { EditorState, Modifier, CompositeDecorator } from 'draft-js';
+import MultiDecorator from 'draft-js-multidecorators';
 import flowRight from 'lodash.flowright';
 
-import tokenize from './tokenize';
-import decorator from './decorator';
-import { isString } from './lib';
-import QueryEditor, { normalizeSelectedIndex } from './QueryEditor';
+import QueryEditor, { LuceneDecorator, normalizeSelectedIndex } from './index';
 import Suggestions, { skills } from './Suggestions';
+import Term from './Term';
 import './App.css';
 
+function strategy(contentBlock, callback, contentState) {
+  contentBlock.findEntityRanges(
+    (character) => {
+      const entityKey = character.getEntity();
+
+      if (entityKey === null) {
+        return false;
+      }
+
+      return contentState.getEntity(entityKey).getType() === 'TERM';
+    },
+    callback
+  );
+}
+
+const decorator = new MultiDecorator([
+  new LuceneDecorator(),
+  new CompositeDecorator([{
+    strategy,
+    component: Term,
+  }])
+]);
 
 class App extends Component {
   state = {
@@ -26,9 +47,9 @@ class App extends Component {
 
   onQueryChange = (queryState) => {
     if (queryState) {
-      const [token] = tokenize(queryState.text);
+      const { token } = queryState;
 
-      if (!isString(token) && token.type === 'operator') {
+      if (token.type && token.type === 'operator') {
         this.handleOperatorInput(token);
       }
     }
