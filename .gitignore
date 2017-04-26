@@ -4,8 +4,9 @@
 # testing
 /coverage
 
-# production
+# compiled files
 /build
+/dist
 
 # misc
 .DS_Store

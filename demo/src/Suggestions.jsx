@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { normalizeSelectedIndex } from './lib';
+import { normalizeSelectedIndex } from '../../src/index';
 import './Suggestions.css';
 
 export const skills = [{
