@@ -3,6 +3,7 @@ const webpack = require('webpack');
 
 const resolve = require('./webpack/resolve');
 const rules = require('./webpack/rules');
+const plugins = require('./webpack/plugins');
 
 module.exports = {
   devtool: 'cheap-module-source-map',
@@ -42,6 +43,7 @@ module.exports = {
   },
 
   plugins: [
+    ...plugins,
     new webpack.HotModuleReplacementPlugin()
   ]
 };

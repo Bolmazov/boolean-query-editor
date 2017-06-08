@@ -3,7 +3,7 @@ import { EditorState, Modifier, CompositeDecorator } from 'draft-js';
 import MultiDecorator from 'draft-js-multidecorators';
 import flowRight from 'lodash.flowright';
 
-import QueryEditor, { LuceneDecorator, normalizeSelectedIndex } from '../../src/index';
+import LuceneQueryEditor, { LuceneDecorator, normalizeSelectedIndex } from '../../src/index';
 import Suggestions, { skills } from './Suggestions';
 import Term from './Term';
 import './App.css';
@@ -177,7 +177,7 @@ class App extends Component {
         {this.renderSuggestions()}
 
         <div className="App-editor">
-          <QueryEditor
+          <LuceneQueryEditor
             ref={(ref) => { this.ref = ref; }}
             editorState={this.state.editorState}
             onChange={this.onChange}

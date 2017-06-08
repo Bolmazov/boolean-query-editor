@@ -1,12 +1,11 @@
 const path = require('path');
 const url = require('url');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const pkg = require('./package.json');
 const resolve = require('./webpack/resolve');
 const rules = require('./webpack/rules');
+const plugins = require('./webpack/plugins');
 
 const publicPath = url.parse(pkg.homepage).pathname;
 
@@ -40,15 +39,9 @@ module.exports = {
   },
 
   plugins: [
-    new HtmlWebpackPlugin({
-      inject: true,
-      template: path.resolve('./demo/index.html')
-    }),
+    ...plugins,
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
-    }),
-    new ExtractTextPlugin({
-      filename: 'index.css',
     })
   ],
 };

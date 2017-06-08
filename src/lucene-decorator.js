@@ -22,9 +22,7 @@ class LuceneDecorator {
 
     this.highlighted[blockKey] = {};
 
-    for (let i = 0; i < tokens.length; i++) {
-      const token = tokens[i];
-
+    tokens.forEach((token) => {
       if (typeof token === 'string') {
         offset += token.length;
       } else {
@@ -36,7 +34,7 @@ class LuceneDecorator {
         occupySlice(decorations, offset, offset + token.content.length, resultId);
         offset += token.content.length;
       }
-    }
+    });
 
     return Immutable.List(decorations);
   };

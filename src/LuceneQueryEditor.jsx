@@ -5,7 +5,7 @@ import tokenize from './tokenize';
 import { noop } from './lib';
 
 
-class QueryEditor extends Component {
+class LuceneQueryEditor extends Component {
   static propTypes = {
     editorState: PropTypes.object.isRequired,
     onChange: PropTypes.func,
@@ -35,6 +35,10 @@ class QueryEditor extends Component {
     this.ref.focus();
   };
 
+  blur = () => {
+    this.ref.blur();
+  };
+
   getTermRange = () => {
     const selection = window.getSelection();
 
@@ -58,7 +62,8 @@ class QueryEditor extends Component {
     }
 
     const tempRange = window.getSelection().getRangeAt(0).cloneRange();
-    tempRange.setStart(tempRange.startContainer, textRange.start);
+    const startOffset = Math.max(textRange.start, 0);
+    tempRange.setStart(tempRange.startContainer, startOffset);
     const rangeRect = tempRange.getBoundingClientRect();
     const text = textRange.text;
     const [token] = tokenize(text);
@@ -158,4 +163,4 @@ class QueryEditor extends Component {
   }
 }
 
-export default QueryEditor;
+export default LuceneQueryEditor;

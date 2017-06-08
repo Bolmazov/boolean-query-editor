@@ -1,6 +1,6 @@
-import QueryEditor from './QueryEditor';
+import LuceneQueryEditor from './LuceneQueryEditor';
 import Decorator from './lucene-decorator';
 
 export { normalizeSelectedIndex } from './lib';
 export const LuceneDecorator = Decorator;
-export default QueryEditor;
+export default LuceneQueryEditor;

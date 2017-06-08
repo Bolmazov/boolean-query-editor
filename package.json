@@ -1,6 +1,6 @@
 {
   "name": "lucene-query-editor",
-  "version": "0.1.0",
+  "version": "0.2.3",
   "description": "Lucene query editor",
   "module": "dist/index.js",
   "dependencies": {
@@ -36,7 +36,8 @@
     "build": "rm -rf dist && babel src -d dist",
     "demo": "webpack --config webpack.config.prod.js",
     "predeploy": "npm run demo",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "prepublish": "npm run build"
   },
   "license": "MIT",
   "author": {
