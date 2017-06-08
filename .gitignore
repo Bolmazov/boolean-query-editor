@@ -17,3 +17,6 @@ yarn-error.log*
 
 # project files
 .idea
+
+# lock files
+yarn.lock

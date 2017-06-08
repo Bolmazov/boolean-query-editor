@@ -1,7 +1,7 @@
 {
-  "name": "lucene-query-editor",
-  "version": "0.2.3",
-  "description": "Lucene query editor",
+  "name": "boolean-query-editor",
+  "version": "1.0.0",
+  "description": "Boolean query editor",
   "module": "dist/index.js",
   "dependencies": {
     "draft-js": "^0.10.0",
@@ -45,7 +45,7 @@
     "email": "ilnur.khalilov@gmail.com",
     "url": "ilnurkhalilov.ru"
   },
-  "homepage": "https://xomyaq.github.io/lucene-query-editor",
+  "homepage": "https://xomyaq.github.io/boolean-query-editor",
   "files": [
     "dist"
   ]

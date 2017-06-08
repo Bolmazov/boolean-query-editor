@@ -3,7 +3,7 @@ import { EditorState, Modifier, CompositeDecorator } from 'draft-js';
 import MultiDecorator from 'draft-js-multidecorators';
 import flowRight from 'lodash.flowright';
 
-import LuceneQueryEditor, { LuceneDecorator, normalizeSelectedIndex } from '../../src/index';
+import BooleanQueryEditor, { BooleanDecorator, normalizeSelectedIndex } from '../../src/index';
 import Suggestions, { skills } from './Suggestions';
 import Term from './Term';
 import './App.css';
@@ -24,7 +24,7 @@ function strategy(contentBlock, callback, contentState) {
 }
 
 const decorator = new MultiDecorator([
-  new LuceneDecorator(),
+  new BooleanDecorator(),
   new CompositeDecorator([{
     strategy,
     component: Term,
@@ -177,7 +177,7 @@ class App extends Component {
         {this.renderSuggestions()}
 
         <div className="App-editor">
-          <LuceneQueryEditor
+          <BooleanQueryEditor
             ref={(ref) => { this.ref = ref; }}
             editorState={this.state.editorState}
             onChange={this.onChange}

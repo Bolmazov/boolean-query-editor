@@ -1,6 +1,6 @@
-import LuceneQueryEditor from './LuceneQueryEditor';
-import Decorator from './lucene-decorator';
+import BooleanQueryEditor from './BooleanQueryEditor';
+import Decorator from './boolean-decorator';
 
 export { normalizeSelectedIndex } from './lib';
-export const LuceneDecorator = Decorator;
-export default LuceneQueryEditor;
+export const BooleanDecorator = Decorator;
+export default BooleanQueryEditor;

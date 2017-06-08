@@ -10,7 +10,7 @@ function occupySlice(targetArr, start, end, componentKey) {
   }
 }
 
-class LuceneDecorator {
+class BooleanDecorator {
   highlighted = {};
 
   getDecorations = (block) => {
@@ -63,4 +63,4 @@ class LuceneDecorator {
   };
 }
 
-export default LuceneDecorator;
+export default BooleanDecorator;

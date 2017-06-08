@@ -5,7 +5,7 @@ import tokenize from './tokenize';
 import { noop } from './lib';
 
 
-class LuceneQueryEditor extends Component {
+class BooleanQueryEditor extends Component {
   static propTypes = {
     editorState: PropTypes.object.isRequired,
     onChange: PropTypes.func,
@@ -163,4 +163,4 @@ class LuceneQueryEditor extends Component {
   }
 }
 
-export default LuceneQueryEditor;
+export default BooleanQueryEditor;

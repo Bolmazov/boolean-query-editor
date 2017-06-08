@@ -1,3 +1,3 @@
-# Lucene Query Editor
+# Boolean Query Editor
 
-[Demo](http://xomyaq.github.io/lucene-query-editor)
+[Demo](http://xomyaq.github.io/boolean-query-editor)

@@ -1,7 +1,7 @@
 import Prism from 'prismjs';
-import './prism-lucene';
+import './prism-boolean';
 
-const grammar = Prism.languages['lucene'];
+const grammar = Prism.languages['boolean'];
 
 /**
  * Tokenizes input text
