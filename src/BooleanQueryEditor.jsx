@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react';
-import { Editor } from 'draft-js';
+import { Editor, getDefaultKeyBinding } from 'draft-js';
 
 import tokenize from './tokenize';
 import { noop } from './lib';
@@ -16,6 +16,8 @@ class BooleanQueryEditor extends Component {
     handleReturn: PropTypes.func,
     handleQueryReturn: PropTypes.func,
     handlePastedText: PropTypes.func,
+    handleKeyCommand: PropTypes.func,
+    keyBindingFn: PropTypes.func,
   };
 
   static defaultProps = {
@@ -27,6 +29,8 @@ class BooleanQueryEditor extends Component {
     handleReturn: noop,
     handleQueryReturn: noop,
     handlePastedText: noop,
+    handleKeyCommand: noop,
+    keyBindingFn: noop,
   };
 
   queryState = null;
@@ -145,6 +149,14 @@ class BooleanQueryEditor extends Component {
 
   handlePastedText = () => false;
 
+  handleKeyCommand = (command) => {
+    this.props.handleKeyCommand(command);
+  };
+
+  keyBindingFn = (e) => {
+    return this.props.keyBindingFn(e) || getDefaultKeyBinding(e);
+  };
+
   render() {
     const { editorState } = this.props;
 
@@ -158,6 +170,8 @@ class BooleanQueryEditor extends Component {
         onDownArrow={this.onDownArrow}
         handleReturn={this.handleReturn}
         handlePastedText={this.handlePastedText}
+        handleKeyCommand={this.handleKeyCommand}
+        keyBindingFn={this.keyBindingFn}
       />
     );
   }
