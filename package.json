@@ -1,6 +1,6 @@
 {
   "name": "boolean-query-editor",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Boolean query editor",
   "module": "dist/index.js",
   "dependencies": {
