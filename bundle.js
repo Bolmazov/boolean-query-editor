@@ -25579,6 +25579,14 @@ var BooleanQueryEditor = function (_Component) {
       var _this12;
 
       return (_this12 = _this).__handlePastedText__REACT_HOT_LOADER__.apply(_this12, arguments);
+    }, _this.handleKeyCommand = function () {
+      var _this13;
+
+      return (_this13 = _this).__handleKeyCommand__REACT_HOT_LOADER__.apply(_this13, arguments);
+    }, _this.keyBindingFn = function () {
+      var _this14;
+
+      return (_this14 = _this).__keyBindingFn__REACT_HOT_LOADER__.apply(_this14, arguments);
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
@@ -25633,12 +25641,12 @@ var BooleanQueryEditor = function (_Component) {
   };
 
   BooleanQueryEditor.prototype.__onChange__REACT_HOT_LOADER__ = function __onChange__REACT_HOT_LOADER__(editorState) {
-    var _this13 = this;
+    var _this15 = this;
 
     this.props.onChange(editorState);
 
     window.requestAnimationFrame(function () {
-      _this13.props.onQueryChange(_this13.getQueryState());
+      _this15.props.onQueryChange(_this15.getQueryState());
     });
   };
 
@@ -25703,15 +25711,23 @@ var BooleanQueryEditor = function (_Component) {
     return false;
   };
 
+  BooleanQueryEditor.prototype.__handleKeyCommand__REACT_HOT_LOADER__ = function __handleKeyCommand__REACT_HOT_LOADER__(command) {
+    this.props.handleKeyCommand(command);
+  };
+
+  BooleanQueryEditor.prototype.__keyBindingFn__REACT_HOT_LOADER__ = function __keyBindingFn__REACT_HOT_LOADER__(e) {
+    return this.props.keyBindingFn(e) || __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_draft_js__["getDefaultKeyBinding"])(e);
+  };
+
   BooleanQueryEditor.prototype.render = function render() {
-    var _this14 = this;
+    var _this16 = this;
 
     var editorState = this.props.editorState;
 
 
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_draft_js__["Editor"], {
       ref: function ref(_ref) {
-        _this14.ref = _ref;
+        _this16.ref = _ref;
       },
       editorState: editorState,
       onChange: this.onChange,
@@ -25719,7 +25735,9 @@ var BooleanQueryEditor = function (_Component) {
       onUpArrow: this.onUpArrow,
       onDownArrow: this.onDownArrow,
       handleReturn: this.handleReturn,
-      handlePastedText: this.handlePastedText
+      handlePastedText: this.handlePastedText,
+      handleKeyCommand: this.handleKeyCommand,
+      keyBindingFn: this.keyBindingFn
     });
   };
 
@@ -25735,7 +25753,9 @@ BooleanQueryEditor.propTypes = {
   onQueryChange: __WEBPACK_IMPORTED_MODULE_0_react__["PropTypes"].func,
   handleReturn: __WEBPACK_IMPORTED_MODULE_0_react__["PropTypes"].func,
   handleQueryReturn: __WEBPACK_IMPORTED_MODULE_0_react__["PropTypes"].func,
-  handlePastedText: __WEBPACK_IMPORTED_MODULE_0_react__["PropTypes"].func
+  handlePastedText: __WEBPACK_IMPORTED_MODULE_0_react__["PropTypes"].func,
+  handleKeyCommand: __WEBPACK_IMPORTED_MODULE_0_react__["PropTypes"].func,
+  keyBindingFn: __WEBPACK_IMPORTED_MODULE_0_react__["PropTypes"].func
 };
 BooleanQueryEditor.defaultProps = {
   onChange: __WEBPACK_IMPORTED_MODULE_3__lib__["b" /* noop */],
@@ -25745,7 +25765,9 @@ BooleanQueryEditor.defaultProps = {
   onQueryChange: __WEBPACK_IMPORTED_MODULE_3__lib__["b" /* noop */],
   handleReturn: __WEBPACK_IMPORTED_MODULE_3__lib__["b" /* noop */],
   handleQueryReturn: __WEBPACK_IMPORTED_MODULE_3__lib__["b" /* noop */],
-  handlePastedText: __WEBPACK_IMPORTED_MODULE_3__lib__["b" /* noop */]
+  handlePastedText: __WEBPACK_IMPORTED_MODULE_3__lib__["b" /* noop */],
+  handleKeyCommand: __WEBPACK_IMPORTED_MODULE_3__lib__["b" /* noop */],
+  keyBindingFn: __WEBPACK_IMPORTED_MODULE_3__lib__["b" /* noop */]
 };
 var _default = BooleanQueryEditor;
 
