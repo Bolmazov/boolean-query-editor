@@ -35,14 +35,6 @@ class BooleanQueryEditor extends Component {
 
   queryState = null;
 
-  focus = () => {
-    this.ref.focus();
-  };
-
-  blur = () => {
-    this.ref.blur();
-  };
-
   getTermRange = () => {
     const selection = window.getSelection();
 
@@ -162,7 +154,6 @@ class BooleanQueryEditor extends Component {
 
     return (
       <Editor
-        ref={ref => { this.ref = ref; }}
         editorState={editorState}
         onChange={this.onChange}
         onEscape={this.onEscape}
