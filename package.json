@@ -37,7 +37,7 @@
     "demo": "webpack --config webpack.config.prod.js",
     "predeploy": "npm run demo",
     "deploy": "gh-pages -d build",
-    "prepublish": "npm run build"
+    "prepublish": "prepublishOnly"
   },
   "license": "MIT",
   "author": {
