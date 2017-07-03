@@ -147,10 +147,12 @@ class BooleanQueryEditor extends Component {
     return 'handled';
   };
 
-  handlePastedText = () => false;
+  handlePastedText = (text, html, editorState) => {
+    return this.props.handlePastedText(text, html, editorState);
+  };
 
   handleKeyCommand = (command) => {
-    this.props.handleKeyCommand(command);
+    return this.props.handleKeyCommand(command);
   };
 
   keyBindingFn = (e) => {
