@@ -9,6 +9,7 @@ class BooleanQueryEditor extends Component {
   static propTypes = {
     editorState: PropTypes.object.isRequired,
     onChange: PropTypes.func,
+    onBlur: PropTypes.func,
     onEscape: PropTypes.func,
     onUpArrow: PropTypes.func,
     onDownArrow: PropTypes.func,
@@ -22,6 +23,7 @@ class BooleanQueryEditor extends Component {
 
   static defaultProps = {
     onChange: noop,
+    onBlur: noop,
     onEscape: noop,
     onUpArrow: noop,
     onDownArrow: noop,
@@ -61,7 +63,7 @@ class BooleanQueryEditor extends Component {
   getQueryState = () => {
     const textRange = this.getTermRange();
 
-    if (textRange === null) {
+    if (textRange === null || textRange !== null && textRange.start < 0) {
       return null;
     }
 
@@ -87,8 +89,13 @@ class BooleanQueryEditor extends Component {
     this.props.onChange(editorState);
 
     window.requestAnimationFrame(() => {
-      this.props.onQueryChange(this.getQueryState());
+      this.queryState = this.getQueryState();
+      this.props.onQueryChange(this.queryState);
     });
+  };
+
+  onBlur = (e) => {
+    this.props.onBlur(e);
   };
 
   onEscape = (e) => {
@@ -138,10 +145,9 @@ class BooleanQueryEditor extends Component {
         'anchorOffset', selection.getFocusOffset() - text.length
       );
 
-      this.props.handleQueryReturn(text, selectedIndex, entitySelection);
-
       this.queryState = null;
       this.props.onQueryChange(this.queryState);
+      this.props.handleQueryReturn(text, selectedIndex, entitySelection);
     }
 
     return 'handled';
@@ -167,6 +173,7 @@ class BooleanQueryEditor extends Component {
         ref={(ref) => { this.ref = ref; }}
         editorState={editorState}
         onChange={this.onChange}
+        onBlur={this.onBlur}
         onEscape={this.onEscape}
         onUpArrow={this.onUpArrow}
         onDownArrow={this.onDownArrow}
