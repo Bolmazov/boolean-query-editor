@@ -10,6 +10,7 @@ class BooleanQueryEditor extends Component {
     editorState: PropTypes.object.isRequired,
     onChange: PropTypes.func,
     onBlur: PropTypes.func,
+    onFocus: PropTypes.func,
     onEscape: PropTypes.func,
     onUpArrow: PropTypes.func,
     onDownArrow: PropTypes.func,
@@ -24,6 +25,7 @@ class BooleanQueryEditor extends Component {
   static defaultProps = {
     onChange: noop,
     onBlur: noop,
+    onFocus: noop,
     onEscape: noop,
     onUpArrow: noop,
     onDownArrow: noop,
@@ -96,6 +98,10 @@ class BooleanQueryEditor extends Component {
 
   onBlur = (e) => {
     this.props.onBlur(e);
+  };
+
+  onFocus = (e) => {
+    this.props.onFocus(e);
   };
 
   onEscape = (e) => {
@@ -174,6 +180,7 @@ class BooleanQueryEditor extends Component {
         editorState={editorState}
         onChange={this.onChange}
         onBlur={this.onBlur}
+        onFocus={this.onFocus}
         onEscape={this.onEscape}
         onUpArrow={this.onUpArrow}
         onDownArrow={this.onDownArrow}
